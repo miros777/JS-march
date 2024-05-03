@@ -147,3 +147,4 @@ for (let i = 0; i < users.length; i++) {
         document.write(`<div>Name: ${user.name}. Age: ${user.age}</div>`);
     }
 }
+
