@@ -127,7 +127,7 @@ let users = [
 document.write(`<h2>Статус true</h2>`);
 for (let i = 0; i < users.length; i++) {
     let user = users[i];
-    if(user.status === true){
+    if (user.status === true) {
         document.write(`<div>Name: ${user.name}. Age: ${user.age}</div>`);
     }
 }
@@ -135,7 +135,7 @@ for (let i = 0; i < users.length; i++) {
 document.write(`<h2>Статус false</h2>`);
 for (let i = 0; i < users.length; i++) {
     let user = users[i];
-    if(user.status === false){
+    if (user.status === false) {
         document.write(`<div>Name: ${user.name}. Age: ${user.age}</div>`);
     }
 }
@@ -143,7 +143,7 @@ for (let i = 0; i < users.length; i++) {
 document.write(`<h2>Старше 30</h2>`);
 for (let i = 0; i < users.length; i++) {
     let user = users[i];
-    if(user.age > 30){
+    if (user.age > 30) {
         document.write(`<div>Name: ${user.name}. Age: ${user.age}</div>`);
     }
 }
@@ -153,7 +153,7 @@ for (let i = 0; i < users.length; i++) {
 --створити масив з:
 - з 5 числових значень
 */
-let arrNum = [2,44,55,66,65];
+let arrNum = [2, 44, 55, 66, 65];
 /*
 - з 5 стічкових значень
 */
@@ -184,10 +184,10 @@ console.log(arrNew);
 - є масив [2,17,13,6,22,31,45,66,100,-18] :
 1. перебрати його циклом while
 */
-let arr = [2,17,13,6,22,31,45,66,100,-18];
+let arr = [2, 17, 13, 6, 22, 31, 45, 66, 100, -18];
 let i = 0;
 let arrLength = arr.length;
-while (i < arrLength){
+while (i < arrLength) {
     console.log(arr[i]);
     i++;
 }
@@ -201,8 +201,8 @@ for (let j = 0; j < arrLength; j++) {
 3. перебрати циклом while та вивести  числа тільки з непарним індексом
 */
 let counter = 0;
-while (counter < arrLength){
-    if(counter % 2 === 1){
+while (counter < arrLength) {
+    if (counter % 2 === 1) {
         console.log(arr[counter]);
     }
     counter++;
@@ -211,7 +211,7 @@ while (counter < arrLength){
 4. перебрати циклом for та вивести  числа тільки з непарним індексом
 */
 for (let j = 0; j < arrLength; j++) {
-    if(j % 2 === 1){
+    if (j % 2 === 1) {
         console.log(arr[j]);
     }
 }
@@ -220,8 +220,8 @@ for (let j = 0; j < arrLength; j++) {
 */
 console.log('---');
 let y = 0;
-while (y < arrLength){
-    if(arr[y] % 2 === 0){
+while (y < arrLength) {
+    if (arr[y] % 2 === 0) {
         console.log(arr[y]);
     }
     y++;
@@ -231,7 +231,7 @@ while (y < arrLength){
 */
 console.log('---');
 for (let j = 0; j < arrLength; j++) {
-    if(arr[j] % 2 === 0){
+    if (arr[j] % 2 === 0) {
         console.log(arr[j]);
     }
 }
@@ -240,7 +240,7 @@ for (let j = 0; j < arrLength; j++) {
 */
 console.log('---');
 for (let j = 0; j < arrLength; j++) {
-    if(arr[j] % 3 === 0){
+    if (arr[j] % 3 === 0) {
         arr[j] = 'okten';
     }
 }
@@ -248,29 +248,258 @@ console.log(arr);
 
 /*
 8. вивести масив в зворотньому порядку.
+*/
+let arrNumber = [2, 17, 13, 6, 22, 31, 45, 66, 100, -18];
+console.log('---');
+for (let j = arrNumber.length - 1; j >= 0; j--) {
+    console.log(arrNumber[j]);
+}
+/*
 9. всі попередні завдання (окрім 8), але в зворотньому циклі (с заду на перед)
+*/
 
+let arr2 = [2, 17, 13, 6, 22, 31, 45, 66, 100, -18];
+
+// let arrLength = arr2.length;
+let iter = arrLength - 1;
+while (iter >= 0) {
+    console.log(arr[iter]);
+    iter--;
+}
+/*
+2. перебрати його циклом for
+*/
+for (let j = arrLength - 1; j >= 0; j--) {
+    console.log(arr2[j]);
+}
+
+/*
+3. перебрати циклом while та вивести  числа тільки з непарним індексом
+*/
+let counter2 = arrLength - 1;
+while (counter2 >= 0) {
+    if (arr[counter2] % 2 === 1) {
+        console.log(arr[counter2]);
+    }
+    counter2--;
+}
+/*
+4. перебрати циклом for та вивести  числа тільки з непарним індексом
+*/
+for (let j = arrLength - 1; j >= 0; j--) {
+    if (arr[j] % 2 === 1) {
+        console.log(arr[j]);
+    }
+}
+/*
+5. перебрати циклом while та вивести  числа тільки парні  значення
+*/
+console.log('---');
+let yyy = arrLength - 1;
+while (yyy >= 0) {
+    if (arr[yyy] % 2 === 0) {
+        console.log(arr[yyy]);
+    }
+    yyy--;
+}
+/*
+6. перебрати циклом for та вивести  числа тільки парні  значення
+*/
+console.log('---');
+for (let j = arrLength - 1; j >= 0; j--) {
+    if (arr[j] % 2 === 0) {
+        console.log(arr[j]);
+    }
+}
+
+
+/*
 - Створити масив з 10 числових елементів. Вивести в консоль всі його елементи в циклі.
+*/
+let arrNumber555 = [22, 11, 22, 33, 4, 4, 566, 7, 78, 8];
+console.log('---');
+for (let j = 0; j < arrNumber555.length; j++) {
+    console.log(arrNumber555[j]);
+}
+/*
 - Створити масив з 10 строкрових елементів. Вивести в консоль всі його елементи в циклі.
+*/
+let arrStrNames = ['ddd', 'hgnhhh', 'fgb', 'ergreg', 'were', 'sdf', 'sdfds', 'ssdfsd', 'dd', 'ff',];
+console.log('---');
+for (const item of arrStrNames) {
+    console.log(item);
+}
+/*
 - Створити масив з 10 елементів будь-якого типу. Вивести в консоль всі його елементи в циклі.
+*/
+console.log('---');
+let arrFirst = [false, true, null, 111, 'ladsda', ['wqewqe', 999], {name: 'Giga'}, 0.9, 777, 'Pink'];
+for (const item of arrFirst) {
+    console.log(item);
+}
+/*
 - Створити масив з 10 елементів числового, стірчкового і булевого типу. За допомогою if та typeof вивести тільки булеві елементи
+*/
+console.log('---');
+let arrFirstMy = [false, true, false, 111, 'ladsda', 'dsdsd', 51511, 555, 777, 'Pink'];
+for (const item of arrFirstMy) {
+    if (typeof item === 'boolean') {
+        console.log(item);
+    }
+}
+/*
 - Створити масив з 10 елементів числового, стірчкового і булевого типу. За допомогою if та typeof вивести тільки числові елементи
+*/
+console.log('---');
+let arrFirstMy11 = [false, true, false, 111, 'ladsda', 'dsdsd', 51511, 555, 777, 'Pink'];
+for (const item of arrFirstMy11) {
+    if (typeof item === 'number') {
+        console.log(item);
+    }
+}
+/*
 - Створити масив з 10 елементів числового, стрічкового і булевого типу. За допомогою if та typeof вивести тільки рядкові елементи
-
+*/
+console.log('---');
+let arrFirstMy77 = [false, true, false, 111, 'ladsda', 'dsdsd', 51511, 555, 777, 'Pink'];
+for (const item of arrFirstMy77) {
+    if (typeof item === 'string') {
+        console.log(item);
+    }
+}
+/*
 - Створити порожній масив. Наповнити його 10 елементами (різними за типами) через звернення до конкретних індексів. Вивести в консоль всі його елементи в циклі.
+*/
+console.log('-----');
+let arrSuperb = [false, true, false, 111, 'ladsda', 'dsdsd', 51511, 555, 777, 'Pink'];
+for (let j = 0; j < arrSuperb.length; j++) {
+    console.log(arrSuperb[j]);
+}
+/*
 - Створити цикл for на 10  ітерацій з кроком 1. Вивести поточний номер кроку через console.log та document.write
+*/
+document.write('<div>for на 10  ітерацій</div>');
+for (let j = 0; j < 10; j++) {
+    document.write(j + 1 + '<br>');
+}
+/*
 - Створити цикл for на 100 ітерацій з кроком 1. Вивести поточний номер кроку через console.log та document.write
+*/
+document.write('<div>for на 100  ітерацій</div>');
+for (let j = 0; j < 100; j++) {
+    document.write(j + 1 + '<br>');
+}
+/*
 - Створити цикл for на 100 ітерацій з кроком 2. Вивести поточний номер кроку через console.log та document.write
+*/
+// debugger;
+document.write('<div>for на 100 з кроком 2.</div>');
+for (let j = 0; j < 100; j += 2) {
+    document.write(j + '<br>');
+}
+/*
 - Створити цикл for на 100 ітерацій. Вивести тільки парні кроки. через console.log + document.write
+*/
+document.write('<div>for на 100 парні кроки</div>');
+for (let j = 0; j < 100; j++) {
+    if (j % 2 === 0) {
+        document.write(j + '<br>');
+    }
+}
+/*
 - Створити цикл for на 100 ітерацій. Вивести тільки непарні кроки. через console.log + document.write
-
-
-
+*/
+document.write('<div>for на 100 непарні кроки</div>');
+for (let j = 0; j < 100; j++) {
+    if (j % 2 > 0) {
+        document.write(j + '<br>');
+    }
+}
+/*
 стоврити масив книжок (назва, кількість сторінок, автори , жанри).
 -знайти наібльшу книжку.
+*/
+let arrBooks = [
+    {
+        name: 'Jimi 777',
+        pages: 177020,
+        author: ['Gary'],
+        zhanr: ['Comedy', 'Dram']
+    },
+    {
+        name: 'Kolobok',
+        pages: 1008889,
+        author: ['Taras Shevchenko'],
+        zhanr: ['Comedy', 'Dram', 'Any']
+    },
+    {
+        name: 'Kolobok222',
+        pages: 1003,
+        author: ['Nazar Shevchenko'],
+        zhanr: ['DDD drama']
+
+    },
+    {
+        name: 'Kolobok6754754754',
+        pages: 10290,
+        author: ['Shevchenko555', 'Franko'],
+        zhanr: ['Ne drama']
+
+    }
+]
+let resMax = 0;
+for (let j = 0; j < arrBooks.length; j++) {
+    if (arrBooks[j]['pages'] > resMax) {
+        resMax = arrBooks[j]['pages'];
+    }
+}
+console.log('Найбільша книга', resMax);
+
+/*
 - знайти книжку/ки з найбільшою кількістю жанрів
+*/
+console.log('=====');
+let resMaxZhanr = 0;
+
+for (let j = 0; j < arrBooks.length; j++) {
+    for (let k = 1; k < arrBooks.length; k++) {
+        if (arrBooks[j]['zhanr'].length > arrBooks[k]['zhanr'].length) {
+            resMaxZhanr = arrBooks[j]['name'];
+        }
+    }
+}
+console.log('Найбільша кількістю жанрів Книга', resMaxZhanr);
+/*
 - знайти книжку/ки з найдовшою назвою
+*/
+let resMaxSizeName = 0;
+let bookName2 = [];
+for (let j = 0; j < arrBooks.length; j++) {
+    if (arrBooks[j]['name'].length > resMaxSizeName) {
+        resMaxSizeName = arrBooks[j]['name'].length;
+        bookName2 = arrBooks[j]['name'];
+    }
+}
+console.log('найдовша Книга', bookName2);
+/*
 - знайти книжку/ки які писали 2 автори
+*/
+let resMaxAuthor = 'Немає такої книги';
+let bookRes = [];
+for (let j = 0; j < arrBooks.length; j++) {
+    if (arrBooks[j]['author'].length === 2) {
+        bookRes.push(arrBooks[j]['name']);
+    }
+}
+console.log('писали 2 автори', bookRes);
+/*
 - знайти книжку/ки які писав 1 автор
 */
+let bookResOneAuthor = [];
+for (let j = 0; j < arrBooks.length; j++) {
+    if (arrBooks[j]['author'].length === 1) {
+        bookResOneAuthor.push(arrBooks[j]['name']);
+    }
+}
+console.log('писал 1 автор', bookResOneAuthor);
 
