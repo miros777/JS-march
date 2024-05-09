@@ -417,18 +417,17 @@ for (let j = 0; j < 100; j++) {
 }
 /*
 стоврити масив книжок (назва, кількість сторінок, автори , жанри).
--знайти наібльшу книжку.
 */
 let arrBooks = [
     {
         name: 'Jimi 777',
-        pages: 177020,
+        pages: 10290,
         author: ['Gary'],
         zhanr: ['Comedy', 'Dram']
     },
     {
         name: 'Kolobok',
-        pages: 1008889,
+        pages: 189,
         author: ['Taras Shevchenko'],
         zhanr: ['Comedy', 'Dram', 'Any']
     },
@@ -440,6 +439,13 @@ let arrBooks = [
 
     },
     {
+        name: 'Kolobok76767',
+        pages: 10290,
+        author: ['Shevchenko555', 'Franko'],
+        zhanr: ['Ne drama']
+
+    },
+    {
         name: 'Kolobok6754754754',
         pages: 10290,
         author: ['Shevchenko555', 'Franko'],
@@ -447,13 +453,24 @@ let arrBooks = [
 
     }
 ]
-let resMax = 0;
-for (let j = 0; j < arrBooks.length; j++) {
-    if (arrBooks[j]['pages'] > resMax) {
-        resMax = arrBooks[j]['pages'];
+/*
+-знайти найбільшу книжку.
+*/
+console.log('=================');
+let resMax = [];
+let start = 0;
+
+for (const startElement of arrBooks) {
+
+    if(startElement.pages > start){
+        start = startElement.pages;
+    }else if (startElement.pages === start) {
+        resMax[resMax.length] = startElement;
+        // console.log(startElement.pages);
+        // console.log(start);
     }
 }
-console.log('Найбільша книга', resMax);
+console.log('Найбільша книга', resMax, 'start', start);
 
 /*
 - знайти книжку/ки з найбільшою кількістю жанрів
