@@ -125,38 +125,39 @@ function Car(id, model, producer, year, speed, volume) {
     this.speed = speed;
     this.volume = volume;
 
-    this.drive = function() {
+    this.drive = function () {
         return `їдемо зі швидкістю ${this.speed} на годину`;
     }
-    this.info = function() {
-        return `
-        id: ${this.id}
-        model: ${this.model}
-        producer: ${this.producer}
-        year: ${this.year}
-        speed: ${this.speed}
-        volume: ${this.volume}
-        `;
+    this.info = function () {
+      return `
+       id: ${this.id};
+       model: ${this.model};
+       producer: ${this.producer};
+       year: ${this.year};
+       speed: ${this.speed};
+       volume: ${this.volume};
+      `;
     }
-    this.increaseMaxSpeed = function(newSpeed){
-       return this.speed += newSpeed;
+    this.increaseMaxSpeed = function (newSpeed) {
+        return this.speed += newSpeed;
     }
-    this.changeYear = function(newValue){
-       return this.year = newValue;
+    this.changeYear = function (newValue) {
+        return this.year = newValue;
     }
-    this.addDriver = function(driver){
-       this.driver = driver;
+    this.addDriver = function (driver) {
+        this.driver = driver;
     }
 }
 
-let car1 = new Car(1,'Megane', 'Renault', 1999, 200, '2.0');
-console.log(car1.info());
+let car1 = new Car(1, 'Megane', 'Renault', 1999, 200, '2.0');
+// console.log(car1.info());
 console.log(car1.drive());
 console.log(car1.increaseMaxSpeed(50));
 console.log(car1.changeYear(2020));
 
-car1.addDriver({id:1, name:'Grag'});
-console.log(car1);
+car1.addDriver({id: 1, name: 'Grag'});
+console.log(car1.info());
+
 /*
 
 - (Те саме, тільки через клас)
@@ -167,23 +168,100 @@ console.log(car1);
     -- changeYear (newValue) - змінює рік випуску на значення newValue
     -- addDriver (driver) - приймає об'єкт який "водій" з довільним набором полів, і додає його в поточний об'єкт car
 */
-class CarNew{
+console.log('================================');
+
+class CarNew {
     constructor(id, model, producer, year, speed, volume) {
-        id;
-        model;
-        producer;
-        year;
-        speed;
-        volume;
+        this.id = id;
+        this.model = model;
+        this.producer = producer;
+        this.year = year;
+        this.speed = speed;
+        this.volume = volume;
     }
+
+    drive() {
+        return `їдемо зі швидкістю ${this.speed} на годину`;
+    }
+
+    info() {
+        let res = '';
+        for (const argumentsKey in this) {
+            res += `${argumentsKey}: ${this[argumentsKey]}
+            `;
+        }
+        return res;
+    }
+
+    increaseMaxSpeed(newSpeed) {
+        return this.speed += newSpeed;
+    }
+
+    changeYear(newValue) {
+        return this.year = newValue;
+    }
+
+    addDriver(driver) {
+        this.driver = driver;
+    }
+
 }
 
+let carNew = new CarNew(1, '500-C', 'MB', 1599, 300, '2.0');
+console.log(carNew.drive());
+console.log(carNew.info());
+console.log(carNew.increaseMaxSpeed(500));
+console.log(carNew.changeYear(2020));
+carNew.addDriver({id: 5, name: 'Vlad'});
+console.log(carNew.info());
 /*
 -створити класс/функцію конструктор попелюшка з полями ім'я, вік, розмір ноги. Створити масив з 10 попелюшок.
+*/
+class Popelushka{
+    name;
+    age;
+    sizeFoot;
+
+    constructor(name, age, sizeFoot) {
+        this.name = name;
+        this.age = age;
+        this.sizeFoot = sizeFoot;
+    }
+}
+let popelushechki = [
+    new Popelushka('Olya', 22, 35),
+    new Popelushka('Olya1', 32, 34),
+    new Popelushka('Olya2', 20, 35),
+    new Popelushka('Olya3', 30, 41),
+    new Popelushka('Olya4', 15, 36),
+    new Popelushka('Olya5', 54, 38),
+    new Popelushka('Olya6', 18, 40),
+    new Popelushka('Olya7', 21, 35),
+    new Popelushka('Olya8', 24, 40),
+    new Popelushka('Olya9', 28, 36)
+];
+console.log(popelushechki);
+
+/*
 Сторити об'єкт класу "принц" за допомоги класу який має поля ім'я, вік, туфелька яку він знайшов.
+ */
+class Prince extends Popelushka{
+
+}
+let prince = new Prince('Kolya', 44, 36);
+console.log(prince);
+/*
 За допомоги циклу знайти яка попелюшка повинна бути з принцом.
+*/
+for (const onePopelushka of popelushechki) {
+    if(onePopelushka.sizeFoot === prince.sizeFoot){
+        console.log(onePopelushka);
+    }
+}
+/*
 Додатково, знайти необхідну попелюшку за допомоги функції масиву find та відповідного колбеку
+ */
+console.log(popelushechki.find(obj => obj.sizeFoot === prince.sizeFoot));
 
-
-
+/*
 Через Array.prototype. створити власний foreach, filter, map*/
