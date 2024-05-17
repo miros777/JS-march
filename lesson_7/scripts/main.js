@@ -153,9 +153,8 @@ Car.prototype.info = function () {
         for (const oneCar in obj) {
             let val = obj[oneCar];
 
-            if (typeof val === 'function') {
-                continue;
-            } else if (typeof val === 'object' && val !== null) {
+            if (typeof val === 'function') continue;
+            if (typeof val === 'object' && val !== null) {
                 res += `${oneCar}: `;
                 show(val);
             } else if(typeof oneCar === 'string'){
