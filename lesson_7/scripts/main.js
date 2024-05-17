@@ -128,16 +128,6 @@ function Car(id, model, producer, year, speed, volume) {
     this.drive = function () {
         return `їдемо зі швидкістю ${this.speed} на годину`;
     }
-    this.info = function () {
-      return `
-       id: ${this.id};
-       model: ${this.model};
-       producer: ${this.producer};
-       year: ${this.year};
-       speed: ${this.speed};
-       volume: ${this.volume};
-      `;
-    }
     this.increaseMaxSpeed = function (newSpeed) {
         return this.speed += newSpeed;
     }
@@ -145,21 +135,44 @@ function Car(id, model, producer, year, speed, volume) {
         return this.year = newValue;
     }
     this.addDriver = function (driver) {
-        this.driver = driver;
+         this.driver = driver;
     }
 }
 
 let car1 = new Car(1, 'Megane', 'Renault', 1999, 200, '2.0');
-// console.log(car1.info());
 console.log(car1.drive());
 console.log(car1.increaseMaxSpeed(50));
 console.log(car1.changeYear(2020));
 
 car1.addDriver({id: 1, name: 'Grag'});
+
+Car.prototype.info = function () {
+    let res = '';
+    function show(obj) {
+
+        for (const oneCar in obj) {
+            let val = obj[oneCar];
+
+            if (typeof val === 'function') {
+                continue;
+            } else if (typeof val === 'object' && val !== null) {
+                res += `${oneCar}: `;
+                show(val);
+            } else if(typeof oneCar === 'string'){
+                res += `${oneCar}: ${val} `;
+            }
+        }
+        return res;
+    }
+
+    return show(this);
+
+}
+console.log('========INFO Car');
 console.log(car1.info());
+console.log('========INFO Car');
 
 /*
-
 - (Те саме, тільки через клас)
 Створити клас який дозволяє створювати об'єкти car, з властивостями модель, виробник, рік випуску, максимальна швидкість, об'єм двигуна. додати в об'єкт функції:
 -- drive () - яка виводить в консоль `їдемо зі швидкістю ${максимальна швидкість} на годину`
@@ -187,8 +200,13 @@ class CarNew {
     info() {
         let res = '';
         for (const argumentsKey in this) {
-            res += `${argumentsKey}: ${this[argumentsKey]}
-            `;
+            if (typeof this[argumentsKey] === 'object' && this[argumentsKey] !== null) {
+                res += `${argumentsKey}: ${JSON.stringify(this[argumentsKey])}
+                `;
+            } else {
+                res += `${argumentsKey}: ${this[argumentsKey]}
+                `;
+            }
         }
         return res;
     }
@@ -213,11 +231,14 @@ console.log(carNew.info());
 console.log(carNew.increaseMaxSpeed(500));
 console.log(carNew.changeYear(2020));
 carNew.addDriver({id: 5, name: 'Vlad'});
+console.log("===INFO");
 console.log(carNew.info());
+console.log("===INFO");
+
 /*
 -створити класс/функцію конструктор попелюшка з полями ім'я, вік, розмір ноги. Створити масив з 10 попелюшок.
 */
-class Popelushka{
+class Popelushka {
     name;
     age;
     sizeFoot;
@@ -228,6 +249,7 @@ class Popelushka{
         this.sizeFoot = sizeFoot;
     }
 }
+
 let popelushechki = [
     new Popelushka('Olya', 22, 35),
     new Popelushka('Olya1', 32, 34),
@@ -245,16 +267,17 @@ console.log(popelushechki);
 /*
 Сторити об'єкт класу "принц" за допомоги класу який має поля ім'я, вік, туфелька яку він знайшов.
  */
-class Prince extends Popelushka{
+class Prince extends Popelushka {
 
 }
+
 let prince = new Prince('Kolya', 44, 36);
 console.log(prince);
 /*
 За допомоги циклу знайти яка попелюшка повинна бути з принцом.
 */
 for (const onePopelushka of popelushechki) {
-    if(onePopelushka.sizeFoot === prince.sizeFoot){
+    if (onePopelushka.sizeFoot === prince.sizeFoot) {
         console.log(onePopelushka);
     }
 }
@@ -262,6 +285,39 @@ for (const onePopelushka of popelushechki) {
 Додатково, знайти необхідну попелюшку за допомоги функції масиву find та відповідного колбеку
  */
 console.log(popelushechki.find(obj => obj.sizeFoot === prince.sizeFoot));
-
 /*
 Через Array.prototype. створити власний foreach, filter, map*/
+Array.prototype.foreachCustom = function (callback) {
+    for (let i = 0; i < this.length; i++) {
+        callback(this[i]);
+    }
+}
+let arr = [1, 2, 33];
+arr.foreachCustom(el => console.log(el));
+
+Array.prototype.filterCustom = function (callback) {
+    let res = [];
+    for (const elem of this) {
+        if (callback(elem)) {
+            res.push(elem);
+        }
+    }
+    return res;
+}
+console.log(popelushechki.filterCustom((elem) => elem.age > 38));
+
+Array.prototype.mapCustom = function (callback) {
+    let res = [];
+    for (const el of this) {
+        res.push(callback(el));
+    }
+    return res;
+}
+let newPopelArr = popelushechki.mapCustom((elem) => {
+    return {
+        ...elem, age: elem.age * 2
+    };
+});
+console.log(newPopelArr);
+
+
