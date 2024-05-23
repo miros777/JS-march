@@ -242,15 +242,15 @@ for (const coursesElement of coursesArray5) {
     divChild3.style.width = '45%';
     divHead.appendChild(divChild3);
 
-    let divForModules = document.createElement('div');
-    divForModules.setAttribute('class', 'mod-wrapper');
-    div.appendChild(divForModules);
+    let ulForModules = document.createElement('ul');
+    ulForModules.setAttribute('class', 'mod-ul');
+    div.appendChild(ulForModules);
 
     if(coursesElement.modules){
         for (const value of coursesElement.modules) {
-            let moduleDiv = document.createElement('div');
-            moduleDiv.innerText = value;
-            divForModules.appendChild(moduleDiv);
+            let moduleLi = document.createElement('li');
+            moduleLi.innerText = value;
+            ulForModules.appendChild(moduleLi);
         }
     }
 
