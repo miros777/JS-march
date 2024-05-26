@@ -1,5 +1,5 @@
 // MY CUSTOM FUNCTIONS
-function makeHr(nameTag){
+function makeHr(nameTag) {
     let hrR = document.createElement('hr');
     hrR.style.height = '3px';
     hrR.style.background = 'red';
@@ -150,6 +150,7 @@ makeHr(btnInDiv);
 let input = document.createElement('input');
 input.setAttribute('name', 'ageNum');
 input.setAttribute('type', 'number');
+input.setAttribute('placeholder', 'Your age');
 let inputBtn = document.createElement('button');
 inputBtn.innerText = 'SEND AGE';
 document.body.append(input, inputBtn);
@@ -166,10 +167,13 @@ form2.appendChild(divInfo);
 inputBtn.addEventListener('click', function (e) {
     e.preventDefault();
 
-    if(form2.ageNum.value < 18){
+    if (form2.ageNum.value < 18 && form2.ageNum.value > 1) {
         divInfo = document.getElementById('res');
         divInfo.innerText = 'Ваш вік менше 18 років';
-    }else{
+    } else if (form2.ageNum.value < 1) {
+        divInfo = document.getElementById('res');
+        divInfo.innerText = 'Помилка. Введіть не може бути 0 або менше';
+    } else {
         divInfo = document.getElementById('res');
         divInfo.innerText = 'Форма відправлена';
     }
@@ -178,9 +182,56 @@ makeHr(form2);
 /*
 *** Створити 3 інпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вмиіст ячеєк.
 При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
-(Додатковачастина для завдання)
+(Додатковачастина для завдання)*/
+let form3 = document.createElement('form');
+form3.setAttribute('name', 'form3');
+form3.setAttribute('action', '#');
 
-*** (подібне було вище, але...будьте уважні в другій частині) створити сторінку з довільним блоком, в середині якого є значення "100грн"
-при перезавантаженні сторінки до значаення додається по 10грн, але !!!
-зміна ціни відбувається тільки на перезавантаження, які відбулись пізніше ніж 10 секунд після попереднього.
-При перезавантаженні, яке відбулось раніше ніж минуло 10 секунд - нічого не відбувається*/
+let form3InputRow = document.createElement('input');
+form3InputRow.setAttribute('name', 'row');
+form3InputRow.setAttribute('type', 'number');
+form3InputRow.setAttribute('placeholder', 'row');
+
+let form3InputSell = document.createElement('input');
+form3InputSell.setAttribute('name', 'cell');
+form3InputSell.setAttribute('type', 'number');
+form3InputSell.setAttribute('placeholder', 'cell');
+
+let form3InputInfo = document.createElement('input');
+form3InputInfo.setAttribute('name', 'info');
+form3InputInfo.setAttribute('type', 'text');
+form3InputInfo.setAttribute('placeholder', 'text');
+
+let form3Btn = document.createElement('button');
+form3Btn.innerText = 'Build Table';
+
+let form3Clear = document.createElement('button');
+form3Clear.innerText = 'Clear';
+
+form3.append(form3InputRow, form3InputSell, form3InputInfo, form3Btn, form3Clear);
+document.body.appendChild(form3);
+form3Btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    let getForm3 = document.forms['form3'];
+
+    let table = document.createElement('table');
+    table.setAttribute('id', 'tableBuild');
+
+    for (let i = 1; i <= getForm3.row.value; i++) {
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+
+        for (let c = 1; c <= getForm3.cell.value; c++) {
+            let td = document.createElement('td');
+            td.style.border = '1px solid';
+            td.innerText = getForm3.info.value;
+            tr.appendChild(td);
+        }
+    }
+
+    document.body.appendChild(table);
+});
+form3Clear.addEventListener('click', function (e){
+    document.getElementById('tableBuild').remove();
+})
+
