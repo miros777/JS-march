@@ -5,7 +5,7 @@
 let form1 = document.forms['form1'];
 
 let formBtn = document.getElementById('send');
-formBtn.addEventListener('click', function (e){
+formBtn.addEventListener('click', function (e) {
     e.preventDefault();
     let getDataForm = {
         name: form1.name.value,
@@ -19,19 +19,37 @@ formBtn.addEventListener('click', function (e){
         li.innerText = `${prop}: ${getDataForm[prop]}`;
         ul.appendChild(li);
     }
-    if(document.getElementById('list')){
+    if (document.getElementById('list')) {
         ul.remove();
-    }else{
-        document.body.appendChild(ul);
+    } else {
+        form1.appendChild(ul);
     }
 });
-
 
 /*
 ==========================
 є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
+*/
+addEventListener("load", function (e) {
+    if (sessionStorage.getItem('start')) {
+        if (localStorage.getItem('num') && localStorage.getItem('num') !== 0) {
+            localStorage.setItem('num', +localStorage.getItem('num') + 1);
+        }
+    } else {
+        sessionStorage.setItem('start', JSON.stringify(new Date()));
+        localStorage.setItem('num', 0);
+    }
+
+    let div = document.createElement('div');
+    div.innerHTML = localStorage.getItem('num');
+    document.body.appendChild(div);
+});
+
+/*
 ==========================
-Є сторінка index.html (назва довільна), при відвідуванні якої в локальне сховще, в масив sessions зберігається інформація про дату та час відвідування сторінки. Є ще сторінка sessions.html (назва довільна), при відвідуванні якої потрібно відмалювати всю інформацію про відвідування сторінки index.html. Інфу НЕ виводити в консоль, а побудувати дом структуру під кожну сессію
+Є сторінка index.html (назва довільна), при відвідуванні якої в локальне сховще, в масив sessions зберігається інформація
+про дату та час відвідування сторінки. Є ще сторінка sessions.html (назва довільна), при відвідуванні якої потрібно відмалювати всю
+інформацію про відвідування сторінки index.html. Інфу НЕ виводити в консоль, а побудувати дом структуру під кожну сессію
 =========================
 зробити масив на 100 об'єктів та дві кнопки prev next
 при завантажені сторінки з'являються перші 10 об'єктів.
