@@ -34,29 +34,27 @@ formBtn.addEventListener('click', function (e) {
     }
 });
 makeHr(form1);
-// makeHr();
 /*
 ==========================
 є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
 */
 addEventListener("load", function (e) {
     if (sessionStorage.getItem('start')) {
-        if (localStorage.getItem('num') && localStorage.getItem('num') !== 0) {
-            localStorage.setItem('num', +localStorage.getItem('num') + 1);
+        if (localStorage.getItem('num') && +localStorage.getItem('num') !== 0) {
+            let newNum = +localStorage.getItem('num') + 1;
+            localStorage.setItem('num', JSON.stringify(newNum));
         }
     } else {
         sessionStorage.setItem('start', JSON.stringify(new Date()));
-        localStorage.setItem('num', 0);
+        localStorage.setItem('num', JSON.stringify(0));
     }
 
     let div = document.createElement('div');
     div.innerHTML = localStorage.getItem('num');
     let divRes = document.getElementById('numCount');
     divRes.appendChild(div);
-    // document.body.appendChild(divRes);
     makeHr(divRes);
 });
-
 
 /*
 зробити масив на 100 об'єктів та дві кнопки prev next
@@ -64,12 +62,19 @@ addEventListener("load", function (e) {
 При натисканні next виводяться настпні 10 об'єктів
 При натисканні prev виводяться попередні 10 об'єктів
 */
+function clearDiv() {
+    let dixWithData = document.querySelectorAll('#allObject div.activeBlock');
+    if (dixWithData) {
+        dixWithData.forEach(el => el.remove());
+    }
+}
+
 let res = [];
-for (let i = 0; i <= 100; i++) {
+for (let i = 0; i < 100; i++) {
     let obj = {id: i + 1, number: (i + 1) * 1000};
     res.push(obj);
 }
-console.log(res);
+
 let btnPrev = document.createElement('button');
 btnPrev.innerText = 'Prev';
 btnPrev.setAttribute('id', 'prev');
@@ -78,49 +83,65 @@ let btnNext = document.createElement('button');
 btnNext.innerText = 'Next';
 btnNext.setAttribute('id', 'next');
 let divWithObj = document.createElement('div');
+divWithObj.setAttribute('id', 'allObject');
 divWithObj.append(btnPrev, btnNext);
 document.body.appendChild(divWithObj);
 
-sessionStorage.setItem('countStart', 0);
-sessionStorage.setItem('countEnd', 10);
+sessionStorage.setItem('countStart', JSON.stringify(0));
+sessionStorage.setItem('countEnd', JSON.stringify(10));
 
 btnNext.addEventListener('click', function (e) {
+    if (+sessionStorage.getItem('countEnd') >= 90) {
+        this.setAttribute('class', 'disabled');
+    }
+    let btnPrev = document.getElementById('prev');
+    btnPrev.classList.remove('disabled');
 
     let end = +sessionStorage.getItem('countEnd') + 10;
     let start = +sessionStorage.getItem('countStart') + 10;
-    sessionStorage.setItem('countStart', start);
-    sessionStorage.setItem('countEnd', end);
+    sessionStorage.setItem('countStart', JSON.stringify(start));
+    sessionStorage.setItem('countEnd', JSON.stringify(end));
+    clearDiv();
 
-    for (let i = start; i <= end; i++) {
-        if (start) {
-            let one = document.createElement('div');
-            // one.classList.add('oneObj');
-            one.classList.toggle('activeBlock');
-            one.innerHTML = `${JSON.stringify(res[i])}`;
-            divWithObj.appendChild(one);
-            // let all = document.getElementsByClassName('activeBlock');
-        }
-
-
-    }
-    // console.log(document.querySelector('oneOBJ'));
-});
-
-btnPrev.addEventListener('click', function (e) {
-    let end = +sessionStorage.getItem('countEnd') - 10;
-    let start = +sessionStorage.getItem('countStart') - 10;
-    sessionStorage.setItem('countStart', start);
-    sessionStorage.setItem('countEnd', end);
-
-    for (let i = start; i <= end; i++) {
+    for (let i = +sessionStorage.getItem('countStart'); i < +sessionStorage.getItem('countEnd'); i++) {
         let one = document.createElement('div');
         one.classList.toggle('activeBlock');
         one.innerHTML = `${JSON.stringify(res[i])}`;
         divWithObj.appendChild(one);
     }
 });
-makeHr(divWithObj);
 
+btnPrev.addEventListener('click', function (e) {
+
+    if (+sessionStorage.getItem('countStart') <= 10) {
+        this.setAttribute('class', 'disabled');
+    }
+    let btnNext = document.getElementById('next');
+    btnNext.classList.remove('disabled');
+
+    let end = +sessionStorage.getItem('countEnd') - 10;
+    let start = +sessionStorage.getItem('countStart') - 10;
+    sessionStorage.setItem('countStart', JSON.stringify(start));
+    sessionStorage.setItem('countEnd', JSON.stringify(end));
+    clearDiv();
+
+    for (let i = +sessionStorage.getItem('countStart'); i < +sessionStorage.getItem('countEnd'); i++) {
+        let one = document.createElement('div');
+        one.classList.toggle('activeBlock');
+        one.innerHTML = `${JSON.stringify(res[i])}`;
+        divWithObj.appendChild(one);
+    }
+});
+
+if (+sessionStorage.getItem('countStart') === 0) {
+    for (let i = +sessionStorage.getItem('countStart'); i < +sessionStorage.getItem('countEnd'); i++) {
+        let one = document.createElement('div');
+        one.classList.toggle('activeBlock');
+        one.innerHTML = `${JSON.stringify(res[i])}`;
+        divWithObj.appendChild(one);
+    }
+}
+makeHr(divWithObj);
 /*
 - Створити довільний елемент з id = text та створити кнопку.Використовуючи JavaScript, зробіть так, щоб при натисканні на кнопку зникав елемент з id="text".
 */
@@ -145,7 +166,6 @@ makeHr(btnInDiv);
 - створити інпут який приймає вік людини та кнопку яка підтверджує дію.При натисканні на кнопку зчитати інформацію з інпуту та перевірити
 вік чи меньше він ніж 18, та повідомити про це користувача
 */
-
 
 let input = document.createElement('input');
 input.setAttribute('name', 'ageNum');
@@ -231,7 +251,7 @@ form3Btn.addEventListener('click', function (e) {
 
     document.body.appendChild(table);
 });
-form3Clear.addEventListener('click', function (e){
+form3Clear.addEventListener('click', function (e) {
     document.getElementById('tableBuild').remove();
 })
 

@@ -7,20 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lesson 10</title>
     <style>
-        /*.oneObj{*/
-        /*    display: none;*/
-        /*}*/
-        .activeBlock {
-            display: block;
+        .disabled{
+            pointer-events: none;
         }
-
     </style>
 </head>
 <body>
 <form action="test.php" name="form1">
-    <input type="text" name="name">
-    <input type="text" name="surname">
-    <input type="text" name="age">
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="surname" placeholder="Surname">
+    <input type="text" name="age" placeholder="Age">
     <button id="send" type="submit">Відправити</button>
 </form>
 <div id="numCount"></div>
