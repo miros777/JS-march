@@ -134,6 +134,9 @@ btnPrev.addEventListener('click', function (e) {
 });
 
 if (+sessionStorage.getItem('countStart') === 0) {
+    let btnPrev = document.getElementById('prev');
+    btnPrev.setAttribute('class', 'disabled');
+
     for (let i = +sessionStorage.getItem('countStart'); i < +sessionStorage.getItem('countEnd'); i++) {
         let one = document.createElement('div');
         one.classList.toggle('activeBlock');
