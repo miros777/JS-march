@@ -32,6 +32,7 @@ formBtn.addEventListener('click', function (e) {
     } else {
         form1.appendChild(ul);
     }
+    form1.reset();
 });
 makeHr(form1);
 /*
@@ -39,11 +40,9 @@ makeHr(form1);
 є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
 */
 addEventListener("load", function (e) {
-    if (sessionStorage.getItem('start')) {
-        if (localStorage.getItem('num') && +localStorage.getItem('num') !== 0) {
-            let newNum = +localStorage.getItem('num') + 1;
-            localStorage.setItem('num', JSON.stringify(newNum));
-        }
+    if (sessionStorage.getItem('start') && !!localStorage.getItem('num')) {
+        let newNum = +localStorage.getItem('num') + 1;
+        localStorage.setItem('num', JSON.stringify(newNum));
     } else {
         sessionStorage.setItem('start', JSON.stringify(new Date()));
         localStorage.setItem('num', JSON.stringify(0));
@@ -55,7 +54,6 @@ addEventListener("load", function (e) {
     divRes.appendChild(div);
     makeHr(divRes);
 });
-
 /*
 зробити масив на 100 об'єктів та дві кнопки prev next
 при завантажені сторінки з'являються перші 10 об'єктів.
@@ -200,6 +198,8 @@ inputBtn.addEventListener('click', function (e) {
         divInfo = document.getElementById('res');
         divInfo.innerText = 'Форма відправлена';
     }
+
+    form2.reset();
 });
 makeHr(form2);
 /*
@@ -253,6 +253,7 @@ form3Btn.addEventListener('click', function (e) {
     }
 
     document.body.appendChild(table);
+    getForm3.reset();
 });
 form3Clear.addEventListener('click', function (e) {
     document.getElementById('tableBuild').remove();
