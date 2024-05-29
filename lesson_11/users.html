@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 11</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="users"></div>
+
+<script>
+    /*
+- зробити файл users.html
+з ендпоінту http://jsonplaceholder.typicode.com/users отримати всіх користувачів
+вивести їх id + name списком та додати посилання з href = user-details.html?id=XXX (замість ХХХ - айді юзера)
+при кліку на посилання перехід на відповідну сторінку, на якій буде вся інформація про користувача (всі 15 полів)
+отримана через додатковий запит (https://jsonplaceholder.typicode.com/users/XXX   де ХХХ - айді користувача)*/
+    fetch('http://jsonplaceholder.typicode.com/users')
+        .then(rec => rec.json())
+        .then(users => {
+            let div = document.createElement('div');
+            let usersAll = document.getElementById('users');
+
+            for (const user of users) {
+                let title = document.createElement('div');
+                title.innerHTML = `id: ${user.id} name: ${user.name}`;
+
+                // console.log(user.id);
+                // console.log(user.name);
+                let link = document.createElement('a');
+                link.href = `https://user-details.html?id=${user.id}`;
+                link.innerHTML = 'Перейти до USER: ' + user.name;
+                // console.log(link);
+
+                div.append(title, link);
+                usersAll.appendChild(div);
+                break;
+            }
+        });
+
+</script>
+</body>
+</html>
