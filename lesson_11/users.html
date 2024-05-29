@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lesson 11</title>
     <style>
-
+        #users>div {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -23,23 +25,24 @@
     fetch('http://jsonplaceholder.typicode.com/users')
         .then(rec => rec.json())
         .then(users => {
-            let div = document.createElement('div');
+
+            let baseURL = document.URL;
+            let resAfterSlice = baseURL.indexOf('users.html'); // num to users.html
+            let newBaseUrl = baseURL.slice(0, resAfterSlice); // get URL http://localhost:63342/JS-march/lesson_11/
+
             let usersAll = document.getElementById('users');
 
             for (const user of users) {
+                let div = document.createElement('div');
                 let title = document.createElement('div');
                 title.innerHTML = `id: ${user.id} name: ${user.name}`;
 
-                // console.log(user.id);
-                // console.log(user.name);
                 let link = document.createElement('a');
-                link.href = `https://user-details.html?id=${user.id}`;
+                link.href = `${newBaseUrl}user-details.html?id=${user.id}`;
                 link.innerHTML = 'Перейти до USER: ' + user.name;
-                // console.log(link);
 
                 div.append(title, link);
                 usersAll.appendChild(div);
-                break;
             }
         });
 
