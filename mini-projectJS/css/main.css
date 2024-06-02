@@ -1,0 +1,270 @@
+body {
+    font-size: 22px;
+}
+
+body, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#nav-top ul li {
+    text-align: center;
+}
+
+button {
+    background: red;
+    color: aliceblue;
+    border: none;
+    border-radius: 3px;
+}
+
+button:hover {
+    background: black;
+    cursor: pointer;
+}
+
+button a {
+    color: aliceblue;
+    text-decoration: none;
+    min-width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*user*/
+.user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+    font-size: 20px;
+    outline: 1px solid #000;
+    padding: 15px;
+    width: 40%;
+    position: relative;
+    min-height: 250px;
+    justify-content: center;
+}
+
+.user:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/user-bg.jpg");
+    background-size: cover;
+    position: absolute;
+    opacity: 0.08;
+    top: 0;
+    z-index: -1;
+}
+
+.user span {
+    padding: 5px;
+}
+
+.userID {
+    color: red;
+    font-weight: 700;
+}
+
+.userContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/*posts*/
+body.post {
+    background-image: url("../img/bg-newspaper.png");
+    background-size: cover;
+}
+
+.postTitle:first-letter {
+    text-transform: uppercase;
+}
+
+.post .postOne {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 30px auto;
+    background: #b30000;
+    padding: 30px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.postTitle {
+    margin-right: 10px;
+}
+
+.post .postOne {
+    flex-direction: column;
+    position: relative;
+}
+
+#allPosts {
+    margin-bottom: 40px;
+    width: 90%;
+}
+
+.postAll, .commentAll {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.postAll .postOne {
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    min-width: 150px;
+    border: 1px solid darkgray;
+    background: #fff;
+}
+
+.postOne .postTitle {
+    padding: 15px;
+    margin: 0;
+}
+
+.postTitle {
+    text-transform: uppercase;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.postID, .postUserID {
+    position: absolute;
+    top: 3px;
+    background: white;
+    color: #000;
+    padding: 10px;
+}
+
+.postUserID {
+    right: 3px;
+}
+
+.postID {
+    left: 3px;
+}
+
+/*comments*/
+.commentOne, .commentHeader {
+    margin-bottom: 30px;
+    min-height: 115px;
+}
+
+.commentName {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: red;
+}
+
+.commentEmail {
+    color: darkblue;
+}
+
+.commentAll .commentOne {
+    width: 22%;
+    min-width: 150px;
+    border: 1px solid darkgray;
+    padding: 30px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.commentAll .commentEmail {
+    font-size: 16px;
+}
+
+.commentAll .commentBody {
+    font-size: 16px;
+}
+
+.commentOne {
+    background: white;
+}
+
+.commentName {
+    margin-bottom: 15px;
+}
+
+.commentStart {
+    position: relative;
+}
+
+.commentStart:before {
+    content: '';
+    display: block;
+    width: 75px;
+    height: 40px;
+    background-image: url(../img/arrow-down.png);
+    background-size: contain;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    margin-left: -20px;
+    background-repeat: no-repeat;
+}
+
+/*user-details*/
+.user-details .user {
+    width: 90%;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+.user-details .user .postOne button {
+    width: 100%;
+}
+
+.user-details .user .postOne button a {
+    min-width: auto;
+}
+
+.userCity.userValue,
+.userBs.userValue {
+    text-align: center;
+    margin: 20px 0 0;
+}
+
+.user-details .postTitle {
+    font-size: 18px;
+
+    text-transform: none;
+}
+
+.user-details .postOne {
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.postAll{
+    /*display: block;*/
+}
+.d-block{
+    display: flex;
+}
+.d-none{
+    display: none;
+}
