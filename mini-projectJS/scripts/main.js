@@ -1,9 +1,10 @@
-function getURL(page, baseURL = new URL(document.URL)){
+function getURL(page, baseURL = new URL(document.URL)) {
     let originURL = baseURL.origin + '/';
     let pathToFile = originURL + 'JS-march/mini-projectJS' + '/';
 
     return pathToFile + page;
 }
+
 /*В index.html
 1 отримати масив об'єктів з endpoint`а https://jsonplaceholder.typicode.com/users
 2 Вивести id,name всіх user в index.html. Окремий блок для кожного user.
@@ -149,92 +150,52 @@ async function getDataUserFromAPI() {
             linkUser.href = '#';
             linkUser.innerText = 'post of current user';
 
+            let divPostAll = document.createElement('div');
+            divPostAll.setAttribute('id', 'postAll');
+
             btnUserPosts.appendChild(linkUser);
-
             divContent.append(spanID, spanName, spanUsername, spanEmail, spanPhone, spanWebsite, spanCity, spanGeoLat, spanGeoLng, spanStreet, spanSuite, spanZipcode, spanNameCompany, spanBs, spanCatch);
-
-            divUser.append(divContent, btnUserPosts);
+            divUser.append(divContent, btnUserPosts, divPostAll);
             document.body.appendChild(divUser);
 
             function handleClick() {
-                // console.log('red');
 
-                    fetch(`https://jsonplaceholder.typicode.com/users/${idUser}/posts`)
-                        .then(value => value.json())
-                        .then(posts => {
+                fetch(`https://jsonplaceholder.typicode.com/users/${idUser}/posts`)
+                    .then(value => value.json())
+                    .then(posts => {
 
-                            let newBaseUrl = getURL('post-details.html');
+                        let newBaseUrl = getURL('post-details.html');
 
-                            let getUserDiv = document.getElementsByClassName('user')[0];
+                        let getUserDiv = document.getElementsByClassName('user')[0];
 
+                        let divPostAll = document.getElementById('postAll');
 
-                            let divPostAll = document.getElementById('postAll');
-                            if(!divPostAll){
-                                let divPostAll = document.createElement('div');
-                                divPostAll.setAttribute('id', 'postAll');
-                                divPostAll.classList.toggle('111');
-                            }else {
-                                divPostAll.classList.toggle('111');
-                            }
+                        for (const post of posts) {
 
+                            let divPost = document.createElement('div');
+                            divPost.setAttribute('class', 'postOne');
 
-                            for (const post of posts) {
+                            let divPostTitle = document.createElement('h4');
+                            divPostTitle.setAttribute('class', 'postTitle');
+                            divPostTitle.innerText = `${post.title}`;
 
-                                let divPost = document.createElement('div');
-                                divPost.setAttribute('class', 'postOne');
+                            let divPostBtn = document.createElement('button');
+                            divPostBtn.setAttribute('id', `post_${post.id}`);
+                            let postLink = document.createElement('a');
+                            postLink.href = `${newBaseUrl}?id=${post.id}&idUser=${idUser}`;
+                            postLink.innerText = 'Read more...';
+                            divPostBtn.appendChild(postLink);
 
-                                let divPostTitle = document.createElement('h4');
-                                divPostTitle.setAttribute('class', 'postTitle');
-                                divPostTitle.innerText = `${post.title}`;
+                            divPost.append(divPostTitle, divPostBtn);
 
-                                let divPostBtn = document.createElement('button');
-                                divPostBtn.setAttribute('id', `post_${post.id}`);
-                                let postLink = document.createElement('a');
-                                postLink.href = `${newBaseUrl}?id=${post.id}&idUser=${idUser}`;
-                                postLink.innerText = 'Read more...';
-                                divPostBtn.appendChild(postLink);
+                            divPostAll.appendChild(divPost);
+                            getUserDiv.appendChild(divPostAll);
 
-                                divPost.append(divPostTitle, divPostBtn);
+                        }
+                    });
+            }
 
-                                divPostAll.appendChild(divPost);
-                                getUserDiv.appendChild(divPostAll);
-                            }
-
-                        })
-                }
-
-            btnUserPosts.addEventListener('click', handleClick);
-            // btnUserPosts.addEventListener('click', function (e) {
-            //     let div = document.getElementById('postAll');
-            //     // console.log(div);
-            //     div.classList.toggle('111');
-            //     console.log(div.className === 'postAll d-block');
-            //     console.log(div);
-            // });
-            // btnUserPosts.addEventListener('click', function (e){
-            //     let div = document.getElementsByClassName('postAll');
-            //     // console.log('fff');
-            //     div.classList.toggle('jjjj');
-            //     console.log(div.className === 'postAll d-block');
-            //     console.log(div);
-            // });
-
-            // function logItem(e) {
-            //     const item = document.getElementById(`allPosts`);
-            //     item.toggleAttribute("hidden");
-            // }
-            //
-            //
-            // const chapters = document.getElementsByClassName("postAll");
-            // console.log(chapters);
-            //
-            // chapters.forEach((chapter) => {
-            //
-            //     console.log(chapter);
-            //
-            //     chapter.addEventListener("toggle", logItem);
-            // });
-
+            btnUserPosts.addEventListener('click', handleClick, {once: true});
         });
 }
 
@@ -249,85 +210,82 @@ async function getUserPostsFromAPI() {
     let idUser = params.get("idUser");
     let idPost = params.get("id");
 
-    let post = await
+    let post = await fetch(`https://jsonplaceholder.typicode.com/users/${idUser}/posts`)
+        .then(val => val.json())
+        .then(posts => {
+            for (const post of posts) {
+                if (post.id == idPost) {
+                    let divPost = document.createElement('div');
+                    divPost.setAttribute('class', 'postOne');
 
-        fetch(`https://jsonplaceholder.typicode.com/users/${idUser}/posts`)
-            .then(val => val.json())
-            .then(posts => {
-                for (const post of posts) {
-                    if (post.id == idPost) {
-                        let divPost = document.createElement('div');
-                        divPost.setAttribute('class', 'postOne');
+                    let divPostID = document.createElement('div');
+                    divPostID.setAttribute('class', 'postID');
+                    divPostID.innerText = `post_id: ${post.id}`;
 
-                        let divPostID = document.createElement('div');
-                        divPostID.setAttribute('class', 'postID');
-                        divPostID.innerText = `post_id: ${post.id}`;
+                    let divPostTitle = document.createElement('div');
+                    divPostTitle.setAttribute('class', 'postTitle');
+                    divPostTitle.innerText = `${post.title}`;
 
-                        let divPostTitle = document.createElement('div');
-                        divPostTitle.setAttribute('class', 'postTitle');
-                        divPostTitle.innerText = `${post.title}`;
+                    let divPostUserID = document.createElement('div');
+                    divPostUserID.setAttribute('class', 'postUserID');
+                    divPostUserID.innerText = `userId: ${post.userId}`;
 
-                        let divPostUserID = document.createElement('div');
-                        divPostUserID.setAttribute('class', 'postUserID');
-                        divPostUserID.innerText = `userId: ${post.userId}`;
+                    let divPostBody = document.createElement('div');
+                    divPostBody.setAttribute('class', 'postBody');
+                    divPostBody.innerText = `${post.body}`;
 
-                        let divPostBody = document.createElement('div');
-                        divPostBody.setAttribute('class', 'postBody');
-                        divPostBody.innerText = `${post.body}`;
+                    divPost.append(divPostID, divPostTitle, divPostUserID, divPostBody);
 
-                        divPost.append(divPostID, divPostTitle, divPostUserID, divPostBody);
-
-                        document.body.appendChild(divPost);
-                    }
+                    document.body.appendChild(divPost);
                 }
-                return idPost;
-            })
-            .then(posts => {
-                return fetch(`https://jsonplaceholder.typicode.com/posts/${idPost}/comments`);
-            })
-            .then(val => val.json())
-            .then(comments => {
+            }
+            return idPost;
+        })
+        .then(posts => {
+            return fetch(`https://jsonplaceholder.typicode.com/posts/${idPost}/comments`);
+        })
+        .then(val => val.json())
+        .then(comments => {
 
-                if (comments.length > 0) {
-                    let currentPost = document.getElementsByClassName('postOne')[0];
-                    let divSeparator = document.createElement('h2');
-                    divSeparator.setAttribute('class', 'commentStart');
-                    divSeparator.innerText = 'Comments All';
+            if (comments.length > 0) {
+                let currentPost = document.getElementsByClassName('postOne')[0];
+                let divSeparator = document.createElement('h2');
+                divSeparator.setAttribute('class', 'commentStart');
+                divSeparator.innerText = 'Comments All';
 
-                    currentPost.appendChild(divSeparator);
+                currentPost.appendChild(divSeparator);
 
-                    let divCommentAll = document.createElement('div');
-                    divCommentAll.setAttribute('class', 'commentAll');
+                let divCommentAll = document.createElement('div');
+                divCommentAll.setAttribute('class', 'commentAll');
 
-                    for (const comment of comments) {
+                for (const comment of comments) {
 
-                        let divComment = document.createElement('div');
-                        divComment.setAttribute('class', 'commentOne');
+                    let divComment = document.createElement('div');
+                    divComment.setAttribute('class', 'commentOne');
 
-                        let divCommentHeader = document.createElement('div');
-                        divCommentHeader.setAttribute('class', 'commentHeader');
+                    let divCommentHeader = document.createElement('div');
+                    divCommentHeader.setAttribute('class', 'commentHeader');
 
-                        let divCommentName = document.createElement('h4');
-                        divCommentName.setAttribute('class', 'commentName');
-                        divCommentName.innerText = `${comment.name}`;
+                    let divCommentName = document.createElement('h4');
+                    divCommentName.setAttribute('class', 'commentName');
+                    divCommentName.innerText = `${comment.name}`;
 
-                        let divCommentEmail = document.createElement('div');
-                        divCommentEmail.setAttribute('class', 'commentEmail');
-                        divCommentEmail.innerText = `${comment.email}`;
+                    let divCommentEmail = document.createElement('div');
+                    divCommentEmail.setAttribute('class', 'commentEmail');
+                    divCommentEmail.innerText = `${comment.email}`;
 
-                        let divCommentBody = document.createElement('div');
-                        divCommentBody.setAttribute('class', 'commentBody');
-                        divCommentBody.innerText = `${comment.body}`;
+                    let divCommentBody = document.createElement('div');
+                    divCommentBody.setAttribute('class', 'commentBody');
+                    divCommentBody.innerText = `${comment.body}`;
 
-                        divComment.append(divCommentHeader, divCommentBody);
-                        divCommentHeader.append(divCommentName, divCommentEmail);
+                    divComment.append(divCommentHeader, divCommentBody);
+                    divCommentHeader.append(divCommentName, divCommentEmail);
 
-                        divCommentAll.appendChild(divComment);
-                        document.body.appendChild(divCommentAll);
-                    }
+                    divCommentAll.appendChild(divComment);
+                    document.body.appendChild(divCommentAll);
                 }
-            })
-
+            }
+        })
 }
 
 /*

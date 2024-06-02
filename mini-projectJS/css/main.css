@@ -36,6 +36,8 @@ button a {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 20px;
+    text-transform: uppercase;
 }
 
 /*user*/
@@ -124,7 +126,7 @@ body.post {
     width: 90%;
 }
 
-.postAll, .commentAll {
+#postAll, .commentAll {
     width: 90%;
     display: flex;
     flex-wrap: wrap;
@@ -132,7 +134,7 @@ body.post {
     margin: 0 auto;
 }
 
-.postAll .postOne {
+#postAll .postOne {
     display: flex;
     flex-direction: column;
     width: 18%;
@@ -257,14 +259,4 @@ body.post {
 .user-details .postOne {
     justify-content: space-between;
     margin-bottom: 30px;
-}
-
-.postAll{
-    /*display: block;*/
-}
-.d-block{
-    display: flex;
-}
-.d-none{
-    display: none;
 }
