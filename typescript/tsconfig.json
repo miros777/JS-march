@@ -1,0 +1,23 @@
+{
+  "compileOptions": {
+//    "rootDir": "./",
+    "target": "es6",
+//    "target": "es2015",
+//    "sourceMap": true,
+//    "lib": ["es2019"]
+    "lib": [
+      "es6",
+      "dom"
+    ]
+  }
+//  "compilerOptions": {
+//    "rootDir": "./",
+//    "module": "commonjs",
+//    "target": "ES2015",
+//    "sourceMap": true,
+//    "lib": ["es2015"]
+//  },
+//  "exclude": [
+//    "node_modules"
+//  ]
+}

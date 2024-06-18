@@ -11,34 +11,34 @@
 - За допомогою 3х різних prompt() отримати 3 слова які являються вашими Імям, По-Батькові та роками. та вивести в консоль*/
 
 
-// 1 //////////////////////////////////////////
-let hello :string = 'hello';
-let own :string = 'own';
-let domZoneCom :string = 'com';
-let domZoneUa :string = 'ua';
-let numStart :number = 1;
-let discount :number = 10;
-let numMinus :number = -999;
-let price :number = 123;
-const PI :number = 3.14;
-let numFloat :number = 2.7;
-let age :number = 16;
-let yes :boolean = true;
-let no :boolean = false;
+1 //////////////////////////////////////////
+let hello22 :string = 'hello';
+let own22 :string = 'own';
+let domZoneCom22 :string = 'com';
+let domZoneUa22 :string = 'ua';
+let numStart22 :number = 1;
+let discount22 :number = 10;
+let numMinus22 :number = -999;
+let price22 :number = 123;
+const PI22 :number = 3.14;
+let numFloat22 :number = 2.7;
+let age22 :number = 16;
+let yes22 :boolean = true;
+let no22 :boolean = false;
 
-console.log(hello);
-console.log(own);
-console.log(domZoneCom);
-console.log(domZoneUa);
-console.log(numStart);
-console.log(discount);
-console.log(numMinus);
-console.log(price);
-console.log(PI);
-console.log(numFloat);
-console.log(age);
-console.log(yes);
-console.log(no);
+console.log(hello22);
+console.log(own22);
+console.log(domZoneCom22);
+console.log(domZoneUa22);
+console.log(numStart22);
+console.log(discount22);
+console.log(numMinus22);
+console.log(price22);
+console.log(PI22);
+console.log(numFloat22);
+console.log(age22);
+console.log(yes22);
+console.log(no22);
 
 // 2 //////////////////////////////////////////////////////
 let firstName :string = 'Andrii';
